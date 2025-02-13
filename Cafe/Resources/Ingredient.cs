@@ -9,8 +9,8 @@ namespace Cafe.Resources
     internal class Ingredient
     {
         private
-        String name;
-        float price;
+            String name;
+            float price;
 
         public Ingredient(String name, int price)
         {
@@ -21,6 +21,16 @@ namespace Cafe.Resources
         public float getPrice()
         {
             return price;
+        }
+
+        public String getName()
+        {
+            return name;
+        }
+
+        public override string ToString()
+        {
+            return name;
         }
     }
 }

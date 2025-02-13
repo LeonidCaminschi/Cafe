@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Cafe.Resources;
 
@@ -11,57 +12,46 @@ namespace Cafe
     {
         static void Main(string[] args)
         {
-            // Cook preparation
-            List<Cook> cooks = new List<Cook>
-            {
-                new Cook("Juan"),
-                new Cook("Donatello")
-            };
+            var (cooks, ingredients, dishes) = init.run();
 
-            // Ingridients preparation
-            Dictionary<string, Ingredient> ingredients = new Dictionary<string, Ingredient>
+            foreach (var dish in dishes)
             {
-                { "Salat", new Ingredient("Salat", 10) },
-                { "Fish", new Ingredient("Fish", 25) },
-                { "Steak", new Ingredient("Steak", 50) },
-                { "Salt", new Ingredient("Salt", 1) },
-                { "Pepper", new Ingredient("Pepper", 2) },
-                { "Egg", new Ingredient("Egg", 5) },
-                { "Potato", new Ingredient("Potato", 3) },
-                { "Tomato", new Ingredient("Tomato", 4) },
-                { "Olive oil", new Ingredient("Olive oil", 4) }
-            };
+                dish.Value.getInfo();
+                Console.WriteLine();
+            }
+            
+            Console.WriteLine("Please input your choice of dish you would like to be served:");
 
-            // Dish prepratation
-            Dictionary<string, Dish> dishes = new Dictionary<string, Dish>
+            Manager manager = new Manager(cooks);
+
+            while (true)
             {
+                bool isError = true;
+                String order = null;
+                while (isError)
                 {
-                    "Omlet",
-                    new Dish(
-                        "Omlet",
-                        "Beaten together eggs with salt and pepper",
-                        new TimeSpan(),
-                        new List<Ingredient> { ingredients["Egg"], ingredients["Salt"], ingredients["Pepper"] }) // Corrected list initialization
-                },
-                {
-                    "Meat Salad",
-                    new Dish(
-                        "Meat Salad",
-                        "Generic Salad,tomatoes with steak and fish meat dressed with olive oil salt and pepper",
-                        new TimeSpan(),
-                        new List<Ingredient> { ingredients["Salat"], ingredients["Tomato"], ingredients["Steak"], ingredients["Fish"], ingredients["Olive oil"], ingredients["Salt"], ingredients["Pepper"] })
-                },
-                {
-                    "Fish and chips",
-                    new Dish(
-                        "Fish and chips",
-                        "Generic British food fish and chips dressed with oil and salt",
-                        new TimeSpan(),
-                        new List<Ingredient> { ingredients["Potato"],   ingredients["Fish"], ingredients["Olive oil"], ingredients["Salt"] })
+                    try
+                    {
+                        order = Console.ReadLine();
+                        isError = false;
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Please insert a valid dish name :)");
+                        isError = true;
+                    }
                 }
-            };
 
-            Console.ReadLine();
+                if (!dishes.ContainsKey(order))
+                {
+                    Console.WriteLine("Please insert a dish from the menu");
+                }
+                else
+                {
+                    manager.DelegateOrder(dishes[order]);
+                }
+
+            }
         }
     }
 }

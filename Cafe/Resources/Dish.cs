@@ -9,13 +9,13 @@ namespace Cafe.Resources
     internal class Dish
     {
         private
-        String name;
-        String description;
-        float price;
-        TimeSpan cookingTime;
-        List<Ingredient> ingredients;
+            String name;
+            String description;
+            float price;
+            int cookingTime;
+            List<Ingredient> ingredients;
 
-        public Dish(String name, String description, TimeSpan cookingTime, List<Ingredient> ingredients)
+        public Dish(String name, String description, int cookingTime, List<Ingredient> ingredients)
         {
             this.name = name;
             this.description = description;
@@ -23,7 +23,7 @@ namespace Cafe.Resources
             this.ingredients = ingredients;
         }
 
-        private float calcPrice()
+        public float calcPrice()
         {
             if (this.price != 0)
             {
@@ -37,7 +37,19 @@ namespace Cafe.Resources
             }
             this.price = intermidiaryPrice * 1.2f;
             return this.price;
+        }
 
+        public int getCookingTime()
+        {
+            return cookingTime;
+        }
+
+        public void getInfo()
+        {
+            Console.WriteLine("Dish name: " + name);
+            Console.WriteLine(description);
+            Console.WriteLine("Ingredients: " + string.Join(", ", ingredients));
+            Console.WriteLine("Price: " + calcPrice());
         }
     }
 }

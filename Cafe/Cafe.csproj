@@ -43,11 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="init.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Cook.cs" />
     <Compile Include="Resources\Dish.cs" />
     <Compile Include="Resources\Ingredient.cs" />
+    <Compile Include="Resources\Manager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
