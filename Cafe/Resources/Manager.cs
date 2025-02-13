@@ -37,7 +37,7 @@ namespace Cafe.Resources
                         minTimeRemaining = cook.tillNextOrder();
                     }
                 }
-                Console.WriteLine("Sorry but the staff at the moment are busy the closest to finishing is " + minTimeRemaining / 60 + " minutes");
+                Console.WriteLine("No cooks available the closest to finishing is about " + minTimeRemaining / 60 + " minutes");
                 return;
             }
 
